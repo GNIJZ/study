@@ -304,8 +304,8 @@ class Transformer(nn.Module):
         src_trg_mask = self.make_pad_mask(trg, src, self.trg_pad_idx, self.src_pad_idx)
 
         enc = self.encoder(src, src_mask)
-        ouput = self.decoder(trg, enc, trg_mask, src_trg_mask)
-        return ouput
+        output = self.decoder(trg, enc, trg_mask, src_trg_mask)
+        return output
 
 
 def initialize_weights(m):
