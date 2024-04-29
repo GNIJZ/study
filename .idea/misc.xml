@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="Black">
-    <option name="sdkName" value="D:\anaconda" />
-  </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.8.19 (sftp://ZK_zhangzijing@172.26.224.11:22/data/ZK_zhangzijing/miniconda/envs/seq2seq/bin/python)" project-jdk-type="Python SDK" />
-</project>
