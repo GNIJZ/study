@@ -285,9 +285,9 @@ class Transformer(nn.Module):
 
         k = k.ne(pad_idx_k).unsqueeze(1).unsqueeze(2)
         k = k.repeat(1, 1, len_q, 1)
-
         mask = q & k
         return mask
+
 
     def make_casual_mask(self, q, k):
         len_q, len_k = q.size(1), k.size(1)
@@ -296,7 +296,10 @@ class Transformer(nn.Module):
         )
         return mask
 
-    def forward(self, src, trg):
+    def forward(self):
+        src = torch.load('tensor_src.pt').to(device)
+        src = torch.cat((src, torch.ones(src.shape[0], 2, dtype=torch.int).to(device)), dim=-1)
+        trg = torch.load('tensor_trg.pt').to(device)
         src_mask = self.make_pad_mask(src, src, self.src_pad_idx, self.src_pad_idx)
         trg_mask = self.make_pad_mask(
             trg, trg, self.trg_pad_idx, self.trg_pad_idx
@@ -326,7 +329,7 @@ if __name__ == "__main__":
     n_heads = 2
     ffn_hidden = 1024
     drop_prob = 0.1
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     model = Transformer(
         src_pad_idx=src_pad_idx,
@@ -347,6 +350,21 @@ if __name__ == "__main__":
     src = torch.cat((src, torch.ones(src.shape[0], 2, dtype=torch.int).to(device)), dim=-1)
     trg = torch.load('tensor_trg.pt').to(device)
 
-    result = model(src, trg)
-    print(result, result.shape)
+    result = model()
+    print(src)
+
+
+    import torch
+    from torchvision.models import resnet18
+    from torchsummary import summary
+    import numpy as np
+
+    # 创建示例输入
+    sample_src = torch.zeros((128, 38), dtype=torch.int).to(device)
+    sample_trg = torch.zeros((128, 38), dtype=torch.int).to(device)
+
+    summary(model, input_size=(128, 38))
+
+
+
 

@@ -257,7 +257,7 @@ if __name__ == "__main__":
     n_heads = 2
     ffn_hidden = 1024
     drop_prob = 0.1
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     model = Transformer(
         src_pad_idx=src_pad_idx,
@@ -279,8 +279,16 @@ if __name__ == "__main__":
     trg = torch.load('tensor_trg.pt').to(device)
 
     result = model(src, trg)
-    print(result, result.shape)
+    print(model)
 
+
+
+
+
+
+
+
+    # 打印模型的参数量
 
 
 

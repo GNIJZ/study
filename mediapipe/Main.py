@@ -22,10 +22,10 @@ def draw_nose(image, x, y):
 
 mpPose=mp.solutions.pose
 pose = mpPose.Pose(static_image_mode=False,
-                   model_complexity=1,
+                   model_complexity=0,
                    smooth_landmarks=True,
-                   min_detection_confidence=0.5,
-                   min_tracking_confidence=0.5
+                   min_detection_confidence=0.7,
+                   min_tracking_confidence=0.70
                    )
 # 获取屏幕的宽度和高度
 screen_width = win32api.GetSystemMetrics(0)
